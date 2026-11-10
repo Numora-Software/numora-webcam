@@ -1,7 +1,7 @@
 # Numora Webcam — Términos de uso
 
 
-**Proveedor:** Numora Software — Bryton Tomás Jiménez Roca (persona natural, titular de la marca Numora Software); contacto: numorasoftware.contacto@gmail.com.
+**Proveedor:** Numora Software; contacto: numorasoftware.contacto@gmail.com.
 
 1. **Qué es.** Numora Webcam permite usar un teléfono Android como cámara (y, de forma limitada, como fuente de audio) de un computador con Windows 11 conectado a la misma red local.
 2. **Licencia.** Se concede una licencia personal, no exclusiva e intransferible para instalar y usar el software en tus dispositivos. No puedes descompilarlo, revenderlo ni usarlo para fines ilícitos. **Premium:** las funciones Premium se desbloquean con un pago único dentro de la app de Android, procesado por Google Play, válido de por vida para esa cuenta de Google mientras la app esté disponible. Los reembolsos se rigen por la política de Google Play. La app de Windows es gratuita; sus funciones Premium se activan cuando está conectada a un teléfono con Premium.

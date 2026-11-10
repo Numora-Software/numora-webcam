@@ -1,7 +1,7 @@
 # Numora Webcam — Política de privacidad
 
 
-**Responsable:** Numora Software — Bryton Tomás Jiménez Roca (persona natural, titular de la marca Numora Software); contacto: numorasoftware.contacto@gmail.com.
+**Responsable:** Numora Software — Bryton Tomas Jimenez Roca (persona natural, titular de la marca Numora Software); contacto: numorasoftware.contacto@gmail.com.
 **Última actualización:** 9 de noviembre de 2026.
 
 ## 1. Qué hace la aplicación
