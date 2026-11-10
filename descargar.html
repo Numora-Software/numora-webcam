@@ -1,80 +1,104 @@
 <!doctype html>
-<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Numora Webcam para Windows</title>
 <meta name="description" content="Usa tu teléfono Android como webcam y micrófono de tu PC con Windows 11. Gratis, cifrado y sin enviar nada a internet.">
 <link rel="icon" href="img/icono.png">
 <style>
-:root{--blanco:#fff;--suave:#F4F7FA;--linea:#E3E8EF;--marino:#011C3F;--marino2:#0A3160;--turq:#0086A2;--turq2:#4DBFD6;--gris:#5B6B80;--gris2:#A0AEC0}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--blanco);color:var(--marino);font:16px/1.6 "Segoe UI",Roboto,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
-.w{max-width:880px;margin:0 auto;padding:0 24px}
-header{padding:28px 0}
-header .w{display:flex;align-items:center;justify-content:space-between}
-header img{height:34px;display:block}
-header a.sec{color:var(--turq);font-weight:600;text-decoration:none;font-size:14px}
-/* tarjeta marino con degradado y grano fino (solo en superficies marino) */
+:root{--blanco:#fff;--suave:#F4F7FA;--linea:#E3E8EF;--marino:#011C3F;--marino2:#0A3160;--turq:#0086A2;--gris:#5B6B80;--gris2:#A0AEC0}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--blanco);color:var(--marino);font:16px/1.55 "Segoe UI",Roboto,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+.w{max-width:880px;margin:0 auto;padding:0 20px}
+header{padding:20px 0 12px}
+header img{height:28px;display:block}
+/* superficies marino: degradado + grano fino (solo aquí, nunca sobre blanco) */
 .marino{position:relative;overflow:hidden;color:#fff;border-radius:22px;background:linear-gradient(135deg,var(--marino),var(--marino2))}
 .marino::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.07;mix-blend-mode:screen;
  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='128' height='128'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='128' height='128' filter='url(%23n)'/></svg>")}
 .marino>*{position:relative;z-index:1}
-.hero{display:grid;grid-template-columns:1.25fr 1fr;align-items:center;gap:8px;padding:44px 44px 44px 48px;margin-top:8px}
-.hero .logo{height:62px;max-width:100%;display:block;margin-bottom:22px}
-.hero h1{font-size:30px;line-height:1.2;margin:0 0 12px;font-weight:600;letter-spacing:-.01em}
-.hero p{margin:0;color:#BECDE1;font-size:16px}
-.hero .masc{display:flex;justify-content:center}
-.hero .masc img{width:100%;max-width:230px;height:auto;display:block}
-.btn{display:inline-flex;align-items:center;gap:10px;background:#fff;color:var(--marino);text-decoration:none;font-weight:600;font-size:16px;height:56px;padding:0 30px;border-radius:28px;margin-top:26px}
-.btn svg{width:20px;height:20px}
-.nota{margin:12px 0 0;font-size:13px;color:#BECDE1}
-h2{font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--gris);font-weight:600;margin:56px 0 16px}
-.pasos{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-.paso{background:var(--suave);border-radius:22px;padding:22px}
-.paso b{display:flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;background:var(--marino);color:#fff;font-size:14px;margin-bottom:14px}
+
+/* móvil primero: una columna */
+.hero{padding:28px 22px 26px;margin-top:4px}
+.hero .masc{display:flex;margin-bottom:18px}
+.hero .masc img{width:92px;height:auto;display:block}
+.hero .logo{height:42px;max-width:100%;display:block;margin-bottom:16px}
+.hero h1{font-size:26px;line-height:1.2;margin:0 0 10px;font-weight:600;letter-spacing:-.01em}
+.hero p{margin:0;color:#BECDE1;font-size:15px}
+.btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;background:#fff;color:var(--marino);border:0;font:inherit;font-weight:600;font-size:16px;height:56px;padding:0 24px;border-radius:28px;margin-top:22px;text-decoration:none;cursor:pointer}
+.btn svg{width:20px;height:20px;flex:none}
+.nota{margin:12px 0 0;font-size:13px;color:#BECDE1;text-align:center}
+
+/* el instalador es para Windows: en el teléfono se ofrece enviarse el enlace */
+.solo-movil{display:none}
+.es-movil .solo-movil{display:block}
+.es-movil .solo-pc{display:none}
+.aviso-pc{background:rgba(255,255,255,.10);border-radius:16px;padding:14px 16px;margin-top:20px;font-size:14px;color:#fff}
+.aviso-pc b{font-weight:600}
+
+h2{font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--gris);font-weight:600;margin:36px 0 14px}
+.pasos{display:grid;grid-template-columns:1fr;gap:12px}
+.paso{background:var(--suave);border-radius:22px;padding:20px}
+.paso b.n{display:flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;background:var(--marino);color:#fff;font-size:14px;margin-bottom:12px}
 .paso h3{margin:0 0 6px;font-size:17px;font-weight:600}
-.paso p{margin:0;color:var(--gris);font-size:14px}
-.aviso{display:flex;gap:16px;background:var(--suave);border-radius:22px;padding:22px 24px;margin-top:14px}
+.paso p{margin:0;color:var(--gris);font-size:15px}
+.aviso{display:flex;gap:14px;background:var(--suave);border-radius:22px;padding:20px;margin-top:12px}
 .visto{flex:none;width:28px;height:28px;border-radius:50%;background:var(--turq);display:flex;align-items:center;justify-content:center}
 .visto svg{width:16px;height:16px}
-.aviso h3{margin:0 0 4px;font-size:17px;font-weight:600}
-.aviso p{margin:0;color:var(--gris);font-size:14px}
-.datos{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:8px}
-.datos div{border-top:1px solid var(--linea);padding-top:14px}
-.datos b{display:block;font-size:15px;font-weight:600;margin-bottom:4px}
-.datos span{color:var(--gris);font-size:14px}
-footer{margin-top:64px;padding:28px 0 40px;border-top:1px solid var(--linea);font-size:13px;color:var(--gris)}
-footer .w{display:flex;flex-wrap:wrap;gap:8px 20px;align-items:center;justify-content:space-between}
-footer a{color:var(--turq);text-decoration:none;font-weight:500}
-.play{display:inline-flex;align-items:center;gap:10px;height:48px;padding:0 24px;border-radius:24px;background:var(--blanco);color:var(--gris);font-weight:600;font-size:15px}
+.aviso h3{margin:0 0 4px;font-size:16px;font-weight:600}
+.aviso p{margin:0;color:var(--gris);font-size:15px}
+.datos{display:grid;grid-template-columns:1fr;gap:14px}
+.datos div{border-top:1px solid var(--linea);padding-top:12px}
+.datos b{display:block;font-size:16px;font-weight:600;margin-bottom:2px}
+.datos span{color:var(--gris);font-size:15px}
+.soporte{display:grid;grid-template-columns:1fr;gap:12px}
+.soporte a.correo{display:inline-block;margin-top:10px;color:var(--turq);font-weight:600;text-decoration:none;word-break:break-all;padding:6px 0}
+.play{display:inline-flex;align-items:center;gap:10px;height:48px;padding:0 22px;border-radius:24px;background:var(--blanco);color:var(--gris);font-weight:600;font-size:15px;margin-top:12px}
 .play small{font-weight:500;color:var(--gris2);font-size:12px}
-.soporte{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.soporte a{color:var(--turq);font-weight:600;text-decoration:none;word-break:break-all}
-@media (max-width:720px){
- .soporte{grid-template-columns:1fr}
- .hero{grid-template-columns:1fr;padding:30px 24px}
- .hero .masc{order:-1;justify-content:flex-start}.hero .masc img{max-width:120px}
- .hero h1{font-size:25px}
- .pasos,.datos{grid-template-columns:1fr}
+footer{margin-top:44px;padding:22px 0 calc(32px + env(safe-area-inset-bottom));border-top:1px solid var(--linea);font-size:13px;color:var(--gris)}
+footer .w{display:flex;flex-direction:column;gap:10px}
+footer a{color:var(--turq);text-decoration:none;font-weight:500;padding:4px 0;display:inline-block}
+
+/* pantallas más anchas */
+@media (min-width:720px){
+ .w{padding:0 24px}
+ header{padding:28px 0 12px} header img{height:34px}
+ .hero{display:grid;grid-template-columns:1.25fr 1fr;align-items:center;gap:8px;padding:44px 44px 44px 48px;margin-top:8px}
+ .hero .masc{order:2;justify-content:center;margin:0}.hero .masc img{width:100%;max-width:230px}
+ .hero .logo{height:62px;margin-bottom:22px}
+ .hero h1{font-size:30px}
+ .btn{width:auto;display:inline-flex}
+ .nota{text-align:left}
+ .pasos,.datos{grid-template-columns:repeat(3,1fr)}
+ .soporte{grid-template-columns:1fr 1fr}
+ h2{margin-top:56px}
+ footer .w{flex-direction:row;justify-content:space-between;align-items:center}
 }
 </style></head><body>
-<header><div class="w"><img src="img/numora-software.svg" alt="Numora Software"><a class="sec" href="#instalar">Cómo instalar</a></div></header>
+<header><div class="w"><img src="img/numora-software.svg" alt="Numora Software"></div></header>
 <main class="w">
  <section class="marino hero">
+  <div class="masc"><img src="img/mascota.png" alt="Mascota de Numora"></div>
   <div>
    <img class="logo" src="img/numora-webcam-oscuro.svg" alt="Numora Webcam">
    <h1>Tu teléfono, como la webcam de tu PC.</h1>
-   <p>Gratis para Windows 11. El video va de tu teléfono a tu computador por tu red Wi‑Fi, cifrado y sin pasar por internet.</p>
-   <a class="btn" href="descargas/0.4.0/NumoraWebcam-Instalador-0.4.0.exe"><svg viewBox="0 0 24 24" fill="none" stroke="#011C3F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>Descargar para Windows</a>
+   <p>Programa gratis para Windows 11. El video va de tu teléfono a tu computador por tu red Wi‑Fi, cifrado y sin pasar por internet.</p>
+
+   <div class="solo-movil">
+    <div class="aviso-pc"><b>Este programa se instala en tu PC</b>, no en el teléfono. Envíate el enlace y ábrelo en tu computador.</div>
+    <button class="btn" id="enviar" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="#011C3F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7M16 6l-4-4-4 4M12 2v13"/></svg><span id="enviarT">Enviarme el enlace</span></button>
+   </div>
+   <div class="solo-pc">
+    <a class="btn" href="descargas/0.4.0/NumoraWebcam-Instalador-0.4.0.exe"><svg viewBox="0 0 24 24" fill="none" stroke="#011C3F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>Descargar para Windows</a>
+   </div>
    <p class="nota">Versión 0.4.0 alpha · Windows 11 (64 bits)</p>
   </div>
-  <div class="masc"><img src="img/mascota.png" alt="Mascota de Numora"></div>
  </section>
 
  <h2 id="instalar">Instalar en tres pasos</h2>
  <div class="pasos">
-  <div class="paso"><b>1</b><h3>Instala la app del teléfono</h3><p>Busca «Numora Webcam» en Google Play.</p></div>
-  <div class="paso"><b>2</b><h3>Instala este programa</h3><p>Ábrelo y acepta el permiso de administrador, que se pide una sola vez para registrar la cámara.</p></div>
-  <div class="paso"><b>3</b><h3>Escanea el código</h3><p>En el teléfono pulsa «Escanear» y apunta al código del PC. Aparece como cámara en Zoom, Teams, OBS y el navegador.</p></div>
+  <div class="paso"><b class="n">1</b><h3>App del teléfono</h3><p>Instala «Numora Webcam» desde Google Play.</p></div>
+  <div class="paso"><b class="n">2</b><h3>Programa del PC</h3><p>Descárgalo y ábrelo. Acepta el permiso de administrador, que se pide una sola vez para registrar la cámara.</p></div>
+  <div class="paso"><b class="n">3</b><h3>Escanea el código</h3><p>En el teléfono pulsa «Escanear» y apunta al código del PC. Aparece como cámara en Zoom, Teams, OBS y el navegador.</p></div>
  </div>
 
  <div class="aviso">
@@ -88,11 +112,26 @@ footer a{color:var(--turq);text-decoration:none;font-weight:500}
   <div><b>Cifrado</b><span>AES‑256 entre tu teléfono y tu PC.</span></div>
   <div><b>Sin cuenta</b><span>No hay registro, anuncios ni rastreadores.</span></div>
  </div>
+
  <h2>Soporte y aplicación del teléfono</h2>
  <div class="soporte">
-  <div class="paso"><h3>¿Necesitas ayuda?</h3><p>Escríbenos y te respondemos por correo.</p><p style="margin-top:10px"><a href="mailto:numorasoftware.contacto@gmail.com">numorasoftware.contacto@gmail.com</a></p></div>
-  <div class="paso"><h3>App para Android</h3><p>La app del teléfono estará en Google Play.</p><p style="margin-top:12px"><span class="play">Google Play <small>Próximamente</small></span></p></div>
+  <div class="paso"><h3>¿Necesitas ayuda?</h3><p>Escríbenos y te respondemos por correo.</p><a class="correo" href="mailto:numorasoftware.contacto@gmail.com">numorasoftware.contacto@gmail.com</a></div>
+  <div class="paso"><h3>App para Android</h3><p>La app del teléfono estará en Google Play.</p><span class="play">Google Play <small>Próximamente</small></span></div>
  </div>
 </main>
 <footer><div class="w"><span>Numora Software · numorasoftware.contacto@gmail.com</span><span><a href="politica-de-privacidad.html">Privacidad</a> · <a href="terminos-de-uso.html">Términos</a></span></div></footer>
+<script>
+(function(){
+ var movil=/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)||(window.matchMedia&&matchMedia('(pointer:coarse)').matches&&innerWidth<820);
+ if(movil)document.documentElement.classList.add('es-movil');
+ var b=document.getElementById('enviar'),t=document.getElementById('enviarT');
+ if(!b)return;
+ b.addEventListener('click',function(){
+  var url='https://numora-software.github.io/numora-webcam/descargar.html';
+  if(navigator.share){navigator.share({title:'Numora Webcam para Windows',text:'Descarga Numora Webcam en tu PC:',url:url}).catch(function(){});return;}
+  if(navigator.clipboard){navigator.clipboard.writeText(url).then(function(){t.textContent='Enlace copiado';});}
+  else{location.href='mailto:?subject='+encodeURIComponent('Numora Webcam para Windows')+'&body='+encodeURIComponent(url);}
+ });
+})();
+</script>
 </body></html>
