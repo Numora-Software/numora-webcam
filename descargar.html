@@ -45,7 +45,12 @@ h2{font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--gris
 footer{margin-top:64px;padding:28px 0 40px;border-top:1px solid var(--linea);font-size:13px;color:var(--gris)}
 footer .w{display:flex;flex-wrap:wrap;gap:8px 20px;align-items:center;justify-content:space-between}
 footer a{color:var(--turq);text-decoration:none;font-weight:500}
+.play{display:inline-flex;align-items:center;gap:10px;height:48px;padding:0 24px;border-radius:24px;background:var(--blanco);color:var(--gris);font-weight:600;font-size:15px}
+.play small{font-weight:500;color:var(--gris2);font-size:12px}
+.soporte{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.soporte a{color:var(--turq);font-weight:600;text-decoration:none;word-break:break-all}
 @media (max-width:720px){
+ .soporte{grid-template-columns:1fr}
  .hero{grid-template-columns:1fr;padding:30px 24px}
  .hero .masc{order:-1;justify-content:flex-start}.hero .masc img{max-width:120px}
  .hero h1{font-size:25px}
@@ -82,6 +87,11 @@ footer a{color:var(--turq);text-decoration:none;font-weight:500}
   <div><b>Privado</b><span>Nada se graba ni se envía a servidores de Numora.</span></div>
   <div><b>Cifrado</b><span>AES‑256 entre tu teléfono y tu PC.</span></div>
   <div><b>Sin cuenta</b><span>No hay registro, anuncios ni rastreadores.</span></div>
+ </div>
+ <h2>Soporte y aplicación del teléfono</h2>
+ <div class="soporte">
+  <div class="paso"><h3>¿Necesitas ayuda?</h3><p>Escríbenos y te respondemos por correo.</p><p style="margin-top:10px"><a href="mailto:numorasoftware.contacto@gmail.com">numorasoftware.contacto@gmail.com</a></p></div>
+  <div class="paso"><h3>App para Android</h3><p>La app del teléfono estará en Google Play.</p><p style="margin-top:12px"><span class="play">Google Play <small>Próximamente</small></span></p></div>
  </div>
 </main>
 <footer><div class="w"><span>Numora Software · numorasoftware.contacto@gmail.com</span><span><a href="politica-de-privacidad.html">Privacidad</a> · <a href="terminos-de-uso.html">Términos</a></span></div></footer>
